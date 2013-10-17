@@ -7,7 +7,7 @@ The codes are compiled by scons. If you have already installed scons
 just type scons command in linux like
 
 - joey@debian:~/joey/skiplist$ scons
-the output will be:
+- the output will be:
 
     scons: Reading SConscript files ...
     scons: done reading SConscript files.
