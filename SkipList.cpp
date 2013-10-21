@@ -62,7 +62,7 @@ T SkipSet<T>::advance(const T& target) const {
 
 	const SkipNode<T> *x = header;
 	for (int i = level; i >= 0; --i) {
-		while (x->forward[i] != NULL && compareTo(x->forward[i]->value, target)/*x->forward[i]->value < target*/) {
+		while (x->forward[i] != NULL && !compareTo(x->forward[i]->value, target)/*x->forward[i]->value < target*/) {
 			x = x->forward[i];
 		}
 	}
