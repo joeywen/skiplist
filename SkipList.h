@@ -1,7 +1,7 @@
 #ifndef __SKIPLIST_H__
 #define __SKIPLIST_H__
 
-#define MAX_LEVEL 100 
+#define MAX_LEVEL 32 
 
 template <class T>
 class SkipNode {
