@@ -177,13 +177,13 @@ int main() {
 
 	//ss.erase(7);
 	//ss.print();
-    cout << "advance 32 is: " << ss.advance(32) << endl;
+    	cout << "advance 32 is: " << ss.advance(32) << endl;
 	//if (!ss.contains(7))
 	//	cout << "7 has been deleted" << endl;
 
-    cout << "current is: " << ss.current() << endl;
-    cout << "next is: " << ss.next() << endl;
-    cout << "after invoke next(), current is: " << ss.current() << endl;
-    ss.print();
+    	cout << "current is: " << ss.current() << endl;
+    	cout << "next is: " << ss.next() << endl;
+    	cout << "after invoke next(), current is: " << ss.current() << endl;
+    	ss.print();
 	return 0;
 }
