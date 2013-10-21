@@ -45,7 +45,7 @@ void SkipSet<T>::print() const {
 
 template <class T>
 bool SkipSet<T>::contains(const T& search_val) const {
-	const SkipNode<T> *x = header;
+    const SkipNode<T> *x = header;
 	for (int i = level; i >= 0; --i) {
 		while (x->forward[i] != NULL && x->forward[i]->value < search_val) {
 			x = x->forward[i];
@@ -57,18 +57,18 @@ bool SkipSet<T>::contains(const T& search_val) const {
 }
 
 template<class T>
-T SkipSet<T>::advance(const T& target) const {
+T SkipSet<T>::advance(const T& target) {
     Comparator<T> compareTo;
-
 	const SkipNode<T> *x = header;
 	for (int i = level; i >= 0; --i) {
-		while (x->forward[i] != NULL && compareTo(x->forward[i]->value, target)/*x->forward[i]->value < target*/) {
+		while (x->forward[i] != NULL && !compareTo(x->forward[i]->value, target)) {
 			x = x->forward[i];
 		}
 	}
 
-	x = x->forward[0];
-	return x;
+	cur = x->forward[0]; //set current pointer
+    x = cur;
+	return x->value;
 }
 
 template <class T>
@@ -104,6 +104,29 @@ void SkipSet<T>::insert(const T &value) {
 	}
 }
 
+template<class T>
+T SkipSet<T>::current() {
+    if (cur == NULL) {
+        cur = new SkipNode<T>(MAX_LEVEL, T());
+        cur = header->forward[0];
+    }
+    return cur->value;
+}
+
+template<class T>
+T SkipSet<T>::next() {
+    if(cur->forward[0] != NULL) {
+        cur = cur->forward[0];
+    }
+
+    return cur->value;
+}
+
+/**
+ * Erase element should modify cur pointer node, will fix it later
+ *
+ */
+/**
 template <class T>
 void SkipSet<T>::erase(const T &value) {
 	SkipNode<T> *x = header;
@@ -132,7 +155,7 @@ void SkipSet<T>::erase(const T &value) {
 			level --;
 	}
 }
-
+*/
 int main() {
 	SkipSet<int> ss;
 	ss.print();
@@ -152,11 +175,15 @@ int main() {
 
 	ss.print();
 
-	ss.erase(7);
-	ss.print();
+	//ss.erase(7);
+	//ss.print();
+    cout << "advance 32 is: " << ss.advance(32) << endl;
+	//if (!ss.contains(7))
+	//	cout << "7 has been deleted" << endl;
 
-	if (!ss.contains(7))
-		cout << "7 has been deleted" << endl;
-
+    cout << "current is: " << ss.current() << endl;
+    cout << "next is: " << ss.next() << endl;
+    cout << "after invoke next(), current is: " << ss.current() << endl;
+    ss.print();
 	return 0;
 }

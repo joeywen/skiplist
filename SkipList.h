@@ -43,11 +43,15 @@ public:
 	bool contains(const T &) const;
 	void insert(const T &);
 	void erase(const T &);
-    T advance(const T &) const;
+        T advance(const T &);
+        T current();
+        T next();
 
 private:
     SkipNode<T> *header;
     int level;
+public:
+    SkipNode<T> *cur;
 };
 
 #endif // __SKIPLIST_H__
